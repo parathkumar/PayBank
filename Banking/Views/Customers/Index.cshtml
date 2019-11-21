@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Banking.Customer>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerDateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CellPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AadhaarNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OccupationType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OccupationSource)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OccupationIncome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.UserName)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerLastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerDateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CellPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AadhaarNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OccupationType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OccupationSource)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OccupationIncome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.CustomerID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.CustomerID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.CustomerID })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProjectPayV7ModelStoreContainer" CdmEntityContainer="ProjectPayV7Entities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="ProjectPayV7Model.Account">
+        <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="Accountno" ColumnName="Accountno" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="CurrentBalance" ColumnName="CurrentBalance" />
+          <ScalarProperty Name="AccountTypeID" ColumnName="AccountTypeID" />
+          <ScalarProperty Name="AccountStatusTypeID" ColumnName="AccountStatusTypeID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AccountStatusTypes">
+      <EntityTypeMapping TypeName="ProjectPayV7Model.AccountStatusType">
+        <MappingFragment StoreEntitySet="AccountStatusType">
+          <ScalarProperty Name="AccountStatusTypeID" ColumnName="AccountStatusTypeID" />
+          <ScalarProperty Name="AccountStatusDescription" ColumnName="AccountStatusDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AccountTypes">
+      <EntityTypeMapping TypeName="ProjectPayV7Model.AccountType">
+        <MappingFragment StoreEntitySet="AccountType">
+          <ScalarProperty Name="AccountTypeID" ColumnName="AccountTypeID" />
+          <ScalarProperty Name="AccountTypeDescription" ColumnName="AccountTypeDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Beneficiaries">
+      <EntityTypeMapping TypeName="ProjectPayV7Model.Beneficiary">
+        <MappingFragment StoreEntitySet="Beneficiary">
+          <ScalarProperty Name="BeneficiaryID" ColumnName="BeneficiaryID" />
+          <ScalarProperty Name="BeneficiaryName" ColumnName="BeneficiaryName" />
+          <ScalarProperty Name="BeneficiaryAccountNumber" ColumnName="BeneficiaryAccountNumber" />
+          <ScalarProperty Name="BeneficiaryBankName" ColumnName="BeneficiaryBankName" />
+          <ScalarProperty Name="BeneficiaryBankIFSC" ColumnName="BeneficiaryBankIFSC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Branches">
+      <EntityTypeMapping TypeName="ProjectPayV7Model.Branch">
+        <MappingFragment StoreEntitySet="Branch">
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+          <ScalarProperty Name="BranchAddress" ColumnName="BranchAddress" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+          <ScalarProperty Name="IFSC" ColumnName="IFSC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="ProjectPayV7Model.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="CustomerFirstName" ColumnName="CustomerFirstName" />
+          <ScalarProperty Name="CustomerLastName" ColumnName="CustomerLastName" />
+          <ScalarProperty Name="CustomerDateOfBirth" ColumnName="CustomerDateOfBirth" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+          <ScalarProperty Name="AadhaarNumber" ColumnName="AadhaarNumber" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="OccupationType" ColumnName="OccupationType" />
+          <ScalarProperty Name="OccupationSource" ColumnName="OccupationSource" />
+          <ScalarProperty Name="OccupationIncome" ColumnName="OccupationIncome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FailedTransactionErrorTypes">
+      <EntityTypeMapping TypeName="ProjectPayV7Model.FailedTransactionErrorType">
+        <MappingFragment StoreEntitySet="FailedTransactionErrorType">
+          <ScalarProperty Name="FailedTransactionErrorTypeID" ColumnName="FailedTransactionErrorTypeID" />
+          <ScalarProperty Name="FailedTransactionDescription" ColumnName="FailedTransactionDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FailedTransactionLogs">
+      <EntityTypeMapping TypeName="ProjectPayV7Model.FailedTransactionLog">
+        <MappingFragment StoreEntitySet="FailedTransactionLog">
+          <ScalarProperty Name="FailedTransactionID" ColumnName="FailedTransactionID" />
+          <ScalarProperty Name="FailedTransactionErrorTypeID" ColumnName="FailedTransactionErrorTypeID" />
+          <ScalarProperty Name="FailedTransactionErrorTime" ColumnName="FailedTransactionErrorTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LoginErrorLogs">
+      <EntityTypeMapping TypeName="ProjectPayV7Model.LoginErrorLog">
+        <MappingFragment StoreEntitySet="LoginErrorLog">
+          <ScalarProperty Name="LoginErrorID" ColumnName="LoginErrorID" />
+          <ScalarProperty Name="LoginErrorTime" ColumnName="LoginErrorTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="ProjectPayV7Model.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="ProjectPayV7Model.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionLogs">
+      <EntityTypeMapping TypeName="ProjectPayV7Model.TransactionLog">
+        <MappingFragment StoreEntitySet="TransactionLog">
+          <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+          <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+          <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+          <ScalarProperty Name="TransactionAmount" ColumnName="TransactionAmount" />
+          <ScalarProperty Name="PreviousBalance" ColumnName="PreviousBalance" />
+          <ScalarProperty Name="Accountno" ColumnName="Accountno" />
+          <ScalarProperty Name="BeneficiaryID" ColumnName="BeneficiaryID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionTypes">
+      <EntityTypeMapping TypeName="ProjectPayV7Model.TransactionType">
+        <MappingFragment StoreEntitySet="TransactionType">
+          <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+          <ScalarProperty Name="TransactionTypeName" ColumnName="TransactionTypeName" />
+          <ScalarProperty Name="TransactionTypeDescription" ColumnName="TransactionTypeDescription" />
+          <ScalarProperty Name="TransactionFeeAmount" ColumnName="TransactionFeeAmount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="ProjectPayV7Model.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="UserTransactionPassword" ColumnName="UserTransactionPassword" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="UserPictureURL" ColumnName="UserPictureURL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserAddresses">
+      <EntityTypeMapping TypeName="ProjectPayV7Model.UserAddress">
+        <MappingFragment StoreEntitySet="UserAddress">
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="CustomerAddress1" ColumnName="CustomerAddress1" />
+          <ScalarProperty Name="CustomerAddress2" ColumnName="CustomerAddress2" />
+          <ScalarProperty Name="Landmark" ColumnName="Landmark" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+          <ScalarProperty Name="IsPermanent" ColumnName="IsPermanent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

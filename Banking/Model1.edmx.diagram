@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="891b89d80f3b4b57a41be274a1409eaf" Name="Diagram1">
+        <EntityTypeShape EntityType="ProjectPayV7Model.Account" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectPayV7Model.AccountStatusType" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectPayV7Model.AccountType" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectPayV7Model.Beneficiary" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectPayV7Model.Branch" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectPayV7Model.Customer" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectPayV7Model.FailedTransactionErrorType" Width="1.5" PointX="9.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectPayV7Model.FailedTransactionLog" Width="1.5" PointX="12" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectPayV7Model.LoginErrorLog" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectPayV7Model.Role" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectPayV7Model.sysdiagram" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectPayV7Model.TransactionLog" Width="1.5" PointX="9.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectPayV7Model.TransactionType" Width="1.5" PointX="7.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectPayV7Model.User" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectPayV7Model.UserAddress" Width="1.5" PointX="7.5" PointY="8.75" IsExpanded="true" />
+        <AssociationConnector Association="ProjectPayV7Model.FK__Account__Account__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectPayV7Model.FK__Account__Account__24927208" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectPayV7Model.FK__Account__BranchI__25869641" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectPayV7Model.FK__Account__Custome__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectPayV7Model.FK_Account_no_TransactionLog" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectPayV7Model.FK__Transacti__Benef__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectPayV7Model.FK__Customer__UserID__173876EA" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectPayV7Model.FK__Transacti__Custo__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectPayV7Model.FK__UserAddre__Custo__1920BF5C" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectPayV7Model.FK__FailedTra__Faile__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectPayV7Model.FK__Users__RoleID__1273C1CD" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectPayV7Model.FK__Transacti__Trans__2C3393D0" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

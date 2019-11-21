@@ -1,0 +1,966 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProjectPayV7Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Accountno" />
+          </Key>
+          <Property Name="Accountno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerID" Type="smallint" />
+          <Property Name="CurrentBalance" Type="int" Nullable="false" />
+          <Property Name="AccountTypeID" Type="tinyint" Nullable="false" />
+          <Property Name="AccountStatusTypeID" Type="tinyint" Nullable="false" />
+          <Property Name="BranchID" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccountStatusType">
+          <Key>
+            <PropertyRef Name="AccountStatusTypeID" />
+          </Key>
+          <Property Name="AccountStatusTypeID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountStatusDescription" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccountType">
+          <Key>
+            <PropertyRef Name="AccountTypeID" />
+          </Key>
+          <Property Name="AccountTypeID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountTypeDescription" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Beneficiary">
+          <Key>
+            <PropertyRef Name="BeneficiaryID" />
+          </Key>
+          <Property Name="BeneficiaryID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BeneficiaryName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BeneficiaryAccountNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BeneficiaryBankName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BeneficiaryBankIFSC" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Branch">
+          <Key>
+            <PropertyRef Name="BranchID" />
+          </Key>
+          <Property Name="BranchID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BranchName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BranchAddress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="State" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PinCode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IFSC" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerFirstName" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="CustomerLastName" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="CustomerDateOfBirth" Type="date" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="CellPhone" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="AadhaarNumber" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="UserID" Type="smallint" Nullable="false" />
+          <Property Name="OccupationType" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="OccupationSource" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="OccupationIncome" Type="money" />
+        </EntityType>
+        <EntityType Name="FailedTransactionErrorType">
+          <Key>
+            <PropertyRef Name="FailedTransactionErrorTypeID" />
+          </Key>
+          <Property Name="FailedTransactionErrorTypeID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FailedTransactionDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FailedTransactionLog">
+          <Key>
+            <PropertyRef Name="FailedTransactionID" />
+          </Key>
+          <Property Name="FailedTransactionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FailedTransactionErrorTypeID" Type="tinyint" Nullable="false" />
+          <Property Name="FailedTransactionErrorTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoginErrorLog">
+          <Key>
+            <PropertyRef Name="LoginErrorID" />
+          </Key>
+          <Property Name="LoginErrorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginErrorTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TransactionLog">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransactionDate" Type="datetime" Nullable="false" />
+          <Property Name="TransactionTypeID" Type="tinyint" Nullable="false" />
+          <Property Name="TransactionAmount" Type="money" Nullable="false" />
+          <Property Name="PreviousBalance" Type="money" Nullable="false" />
+          <Property Name="Accountno" Type="int" Nullable="false" />
+          <Property Name="BeneficiaryID" Type="tinyint" Nullable="false" />
+          <Property Name="CustomerID" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransactionType">
+          <Key>
+            <PropertyRef Name="TransactionTypeID" />
+          </Key>
+          <Property Name="TransactionTypeID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransactionTypeName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TransactionTypeDescription" Type="nvarchar(max)" />
+          <Property Name="TransactionFeeAmount" Type="money" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ProjectPayV7.dbo.UserAddress' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UserAddress">
+          <Key>
+            <PropertyRef Name="CustomerAddress1" />
+            <PropertyRef Name="CustomerAddress2" />
+            <PropertyRef Name="Landmark" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="PinCode" />
+          </Key>
+          <Property Name="CustomerID" Type="smallint" />
+          <Property Name="CustomerAddress1" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CustomerAddress2" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Landmark" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="State" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PinCode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsPermanent" Type="bit" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserPassword" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserTransactionPassword" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RoleID" Type="smallint" />
+          <Property Name="UserPictureURL" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK__Account__Account__239E4DCF">
+          <End Role="AccountType" Type="Self.AccountType" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountType">
+              <PropertyRef Name="AccountTypeID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="AccountTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account__Account__24927208">
+          <End Role="AccountStatusType" Type="Self.AccountStatusType" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountStatusType">
+              <PropertyRef Name="AccountStatusTypeID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="AccountStatusTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account__BranchI__25869641">
+          <End Role="Branch" Type="Self.Branch" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="BranchID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="BranchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account__Custome__22AA2996">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customer__UserID__173876EA">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FailedTra__Faile__32E0915F">
+          <End Role="FailedTransactionErrorType" Type="Self.FailedTransactionErrorType" Multiplicity="1" />
+          <End Role="FailedTransactionLog" Type="Self.FailedTransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FailedTransactionErrorType">
+              <PropertyRef Name="FailedTransactionErrorTypeID" />
+            </Principal>
+            <Dependent Role="FailedTransactionLog">
+              <PropertyRef Name="FailedTransactionErrorTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__Benef__2D27B809">
+          <End Role="Beneficiary" Type="Self.Beneficiary" Multiplicity="1" />
+          <End Role="TransactionLog" Type="Self.TransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beneficiary">
+              <PropertyRef Name="BeneficiaryID" />
+            </Principal>
+            <Dependent Role="TransactionLog">
+              <PropertyRef Name="BeneficiaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__Custo__2E1BDC42">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="TransactionLog" Type="Self.TransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="TransactionLog">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__Trans__2C3393D0">
+          <End Role="TransactionType" Type="Self.TransactionType" Multiplicity="1" />
+          <End Role="TransactionLog" Type="Self.TransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionType">
+              <PropertyRef Name="TransactionTypeID" />
+            </Principal>
+            <Dependent Role="TransactionLog">
+              <PropertyRef Name="TransactionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserAddre__Custo__1920BF5C">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="UserAddress" Type="Self.UserAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="UserAddress">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleID__1273C1CD">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Account_no_TransactionLog">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="TransactionLog" Type="Self.TransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Accountno" />
+            </Principal>
+            <Dependent Role="TransactionLog">
+              <PropertyRef Name="Accountno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjectPayV7ModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountStatusType" EntityType="Self.AccountStatusType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountType" EntityType="Self.AccountType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Beneficiary" EntityType="Self.Beneficiary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FailedTransactionErrorType" EntityType="Self.FailedTransactionErrorType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FailedTransactionLog" EntityType="Self.FailedTransactionLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginErrorLog" EntityType="Self.LoginErrorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionLog" EntityType="Self.TransactionLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionType" EntityType="Self.TransactionType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserAddress" EntityType="Self.UserAddress" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UserAddress].[CustomerID] AS [CustomerID], 
+    [UserAddress].[CustomerAddress1] AS [CustomerAddress1], 
+    [UserAddress].[CustomerAddress2] AS [CustomerAddress2], 
+    [UserAddress].[Landmark] AS [Landmark], 
+    [UserAddress].[City] AS [City], 
+    [UserAddress].[State] AS [State], 
+    [UserAddress].[PinCode] AS [PinCode], 
+    [UserAddress].[IsPermanent] AS [IsPermanent]
+    FROM [dbo].[UserAddress] AS [UserAddress]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Account__Account__239E4DCF" Association="Self.FK__Account__Account__239E4DCF">
+            <End Role="AccountType" EntitySet="AccountType" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account__Account__24927208" Association="Self.FK__Account__Account__24927208">
+            <End Role="AccountStatusType" EntitySet="AccountStatusType" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account__BranchI__25869641" Association="Self.FK__Account__BranchI__25869641">
+            <End Role="Branch" EntitySet="Branch" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account__Custome__22AA2996" Association="Self.FK__Account__Custome__22AA2996">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customer__UserID__173876EA" Association="Self.FK__Customer__UserID__173876EA">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FailedTra__Faile__32E0915F" Association="Self.FK__FailedTra__Faile__32E0915F">
+            <End Role="FailedTransactionErrorType" EntitySet="FailedTransactionErrorType" />
+            <End Role="FailedTransactionLog" EntitySet="FailedTransactionLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__Benef__2D27B809" Association="Self.FK__Transacti__Benef__2D27B809">
+            <End Role="Beneficiary" EntitySet="Beneficiary" />
+            <End Role="TransactionLog" EntitySet="TransactionLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__Custo__2E1BDC42" Association="Self.FK__Transacti__Custo__2E1BDC42">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="TransactionLog" EntitySet="TransactionLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__Trans__2C3393D0" Association="Self.FK__Transacti__Trans__2C3393D0">
+            <End Role="TransactionType" EntitySet="TransactionType" />
+            <End Role="TransactionLog" EntitySet="TransactionLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserAddre__Custo__1920BF5C" Association="Self.FK__UserAddre__Custo__1920BF5C">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="UserAddress" EntitySet="UserAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleID__1273C1CD" Association="Self.FK__Users__RoleID__1273C1CD">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Account_no_TransactionLog" Association="Self.FK_Account_no_TransactionLog">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="TransactionLog" EntitySet="TransactionLog" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjectPayV7Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Accountno" />
+          </Key>
+          <Property Name="Accountno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int16" />
+          <Property Name="CurrentBalance" Type="Int32" Nullable="false" />
+          <Property Name="AccountTypeID" Type="Byte" Nullable="false" />
+          <Property Name="AccountStatusTypeID" Type="Byte" Nullable="false" />
+          <Property Name="BranchID" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="AccountType" Relationship="Self.FK__Account__Account__239E4DCF" FromRole="Account" ToRole="AccountType" />
+          <NavigationProperty Name="AccountStatusType" Relationship="Self.FK__Account__Account__24927208" FromRole="Account" ToRole="AccountStatusType" />
+          <NavigationProperty Name="Branch" Relationship="Self.FK__Account__BranchI__25869641" FromRole="Account" ToRole="Branch" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Account__Custome__22AA2996" FromRole="Account" ToRole="Customer" />
+          <NavigationProperty Name="TransactionLogs" Relationship="Self.FK_Account_no_TransactionLog" FromRole="Account" ToRole="TransactionLog" />
+        </EntityType>
+        <EntityType Name="AccountStatusType">
+          <Key>
+            <PropertyRef Name="AccountStatusTypeID" />
+          </Key>
+          <Property Name="AccountStatusTypeID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountStatusDescription" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK__Account__Account__24927208" FromRole="AccountStatusType" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="AccountType">
+          <Key>
+            <PropertyRef Name="AccountTypeID" />
+          </Key>
+          <Property Name="AccountTypeID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountTypeDescription" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK__Account__Account__239E4DCF" FromRole="AccountType" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Beneficiary">
+          <Key>
+            <PropertyRef Name="BeneficiaryID" />
+          </Key>
+          <Property Name="BeneficiaryID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BeneficiaryName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BeneficiaryAccountNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BeneficiaryBankName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BeneficiaryBankIFSC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TransactionLogs" Relationship="Self.FK__Transacti__Benef__2D27B809" FromRole="Beneficiary" ToRole="TransactionLog" />
+        </EntityType>
+        <EntityType Name="Branch">
+          <Key>
+            <PropertyRef Name="BranchID" />
+          </Key>
+          <Property Name="BranchID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BranchName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BranchAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PinCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IFSC" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK__Account__BranchI__25869641" FromRole="Branch" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerFirstName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustomerLastName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustomerDateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EmailAddress" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CellPhone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AadhaarNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserID" Type="Int16" Nullable="false" />
+          <Property Name="OccupationType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OccupationSource" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OccupationIncome" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK__Account__Custome__22AA2996" FromRole="Customer" ToRole="Account" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Customer__UserID__173876EA" FromRole="Customer" ToRole="Users" />
+          <NavigationProperty Name="TransactionLogs" Relationship="Self.FK__Transacti__Custo__2E1BDC42" FromRole="Customer" ToRole="TransactionLog" />
+          <NavigationProperty Name="UserAddresses" Relationship="Self.FK__UserAddre__Custo__1920BF5C" FromRole="Customer" ToRole="UserAddress" />
+        </EntityType>
+        <EntityType Name="FailedTransactionErrorType">
+          <Key>
+            <PropertyRef Name="FailedTransactionErrorTypeID" />
+          </Key>
+          <Property Name="FailedTransactionErrorTypeID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FailedTransactionDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="FailedTransactionLogs" Relationship="Self.FK__FailedTra__Faile__32E0915F" FromRole="FailedTransactionErrorType" ToRole="FailedTransactionLog" />
+        </EntityType>
+        <EntityType Name="FailedTransactionLog">
+          <Key>
+            <PropertyRef Name="FailedTransactionID" />
+          </Key>
+          <Property Name="FailedTransactionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FailedTransactionErrorTypeID" Type="Byte" Nullable="false" />
+          <Property Name="FailedTransactionErrorTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="FailedTransactionErrorType" Relationship="Self.FK__FailedTra__Faile__32E0915F" FromRole="FailedTransactionLog" ToRole="FailedTransactionErrorType" />
+        </EntityType>
+        <EntityType Name="LoginErrorLog">
+          <Key>
+            <PropertyRef Name="LoginErrorID" />
+          </Key>
+          <Property Name="LoginErrorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginErrorTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__RoleID__1273C1CD" FromRole="Role" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TransactionLog">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransactionTypeID" Type="Byte" Nullable="false" />
+          <Property Name="TransactionAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="PreviousBalance" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Accountno" Type="Int32" Nullable="false" />
+          <Property Name="BeneficiaryID" Type="Byte" Nullable="false" />
+          <Property Name="CustomerID" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Account_no_TransactionLog" FromRole="TransactionLog" ToRole="Account" />
+          <NavigationProperty Name="Beneficiary" Relationship="Self.FK__Transacti__Benef__2D27B809" FromRole="TransactionLog" ToRole="Beneficiary" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Transacti__Custo__2E1BDC42" FromRole="TransactionLog" ToRole="Customer" />
+          <NavigationProperty Name="TransactionType" Relationship="Self.FK__Transacti__Trans__2C3393D0" FromRole="TransactionLog" ToRole="TransactionType" />
+        </EntityType>
+        <EntityType Name="TransactionType">
+          <Key>
+            <PropertyRef Name="TransactionTypeID" />
+          </Key>
+          <Property Name="TransactionTypeID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransactionTypeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TransactionTypeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionFeeAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="TransactionLogs" Relationship="Self.FK__Transacti__Trans__2C3393D0" FromRole="TransactionType" ToRole="TransactionLog" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserTransactionPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleID" Type="Int16" />
+          <Property Name="UserPictureURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK__Customer__UserID__173876EA" FromRole="Users" ToRole="Customer" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__Users__RoleID__1273C1CD" FromRole="Users" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="UserAddress">
+          <Key>
+            <PropertyRef Name="CustomerAddress1" />
+            <PropertyRef Name="CustomerAddress2" />
+            <PropertyRef Name="Landmark" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="PinCode" />
+          </Key>
+          <Property Name="CustomerID" Type="Int16" />
+          <Property Name="CustomerAddress1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustomerAddress2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Landmark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PinCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsPermanent" Type="Boolean" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__UserAddre__Custo__1920BF5C" FromRole="UserAddress" ToRole="Customer" />
+        </EntityType>
+        <Association Name="FK__Account__Account__239E4DCF">
+          <End Role="AccountType" Type="Self.AccountType" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountType">
+              <PropertyRef Name="AccountTypeID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="AccountTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account__Account__24927208">
+          <End Role="AccountStatusType" Type="Self.AccountStatusType" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountStatusType">
+              <PropertyRef Name="AccountStatusTypeID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="AccountStatusTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account__BranchI__25869641">
+          <End Role="Branch" Type="Self.Branch" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="BranchID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="BranchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account__Custome__22AA2996">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Account_no_TransactionLog">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="TransactionLog" Type="Self.TransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Accountno" />
+            </Principal>
+            <Dependent Role="TransactionLog">
+              <PropertyRef Name="Accountno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__Benef__2D27B809">
+          <End Role="Beneficiary" Type="Self.Beneficiary" Multiplicity="1" />
+          <End Role="TransactionLog" Type="Self.TransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beneficiary">
+              <PropertyRef Name="BeneficiaryID" />
+            </Principal>
+            <Dependent Role="TransactionLog">
+              <PropertyRef Name="BeneficiaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customer__UserID__173876EA">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__Custo__2E1BDC42">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="TransactionLog" Type="Self.TransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="TransactionLog">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserAddre__Custo__1920BF5C">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="UserAddress" Type="Self.UserAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="UserAddress">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FailedTra__Faile__32E0915F">
+          <End Role="FailedTransactionErrorType" Type="Self.FailedTransactionErrorType" Multiplicity="1" />
+          <End Role="FailedTransactionLog" Type="Self.FailedTransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FailedTransactionErrorType">
+              <PropertyRef Name="FailedTransactionErrorTypeID" />
+            </Principal>
+            <Dependent Role="FailedTransactionLog">
+              <PropertyRef Name="FailedTransactionErrorTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleID__1273C1CD">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__Trans__2C3393D0">
+          <End Role="TransactionType" Type="Self.TransactionType" Multiplicity="1" />
+          <End Role="TransactionLog" Type="Self.TransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionType">
+              <PropertyRef Name="TransactionTypeID" />
+            </Principal>
+            <Dependent Role="TransactionLog">
+              <PropertyRef Name="TransactionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjectPayV7Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="AccountStatusTypes" EntityType="Self.AccountStatusType" />
+          <EntitySet Name="AccountTypes" EntityType="Self.AccountType" />
+          <EntitySet Name="Beneficiaries" EntityType="Self.Beneficiary" />
+          <EntitySet Name="Branches" EntityType="Self.Branch" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="FailedTransactionErrorTypes" EntityType="Self.FailedTransactionErrorType" />
+          <EntitySet Name="FailedTransactionLogs" EntityType="Self.FailedTransactionLog" />
+          <EntitySet Name="LoginErrorLogs" EntityType="Self.LoginErrorLog" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TransactionLogs" EntityType="Self.TransactionLog" />
+          <EntitySet Name="TransactionTypes" EntityType="Self.TransactionType" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserAddresses" EntityType="Self.UserAddress" />
+          <AssociationSet Name="FK__Account__Account__239E4DCF" Association="Self.FK__Account__Account__239E4DCF">
+            <End Role="AccountType" EntitySet="AccountTypes" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account__Account__24927208" Association="Self.FK__Account__Account__24927208">
+            <End Role="AccountStatusType" EntitySet="AccountStatusTypes" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account__BranchI__25869641" Association="Self.FK__Account__BranchI__25869641">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account__Custome__22AA2996" Association="Self.FK__Account__Custome__22AA2996">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Account_no_TransactionLog" Association="Self.FK_Account_no_TransactionLog">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="TransactionLog" EntitySet="TransactionLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__Benef__2D27B809" Association="Self.FK__Transacti__Benef__2D27B809">
+            <End Role="Beneficiary" EntitySet="Beneficiaries" />
+            <End Role="TransactionLog" EntitySet="TransactionLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customer__UserID__173876EA" Association="Self.FK__Customer__UserID__173876EA">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__Custo__2E1BDC42" Association="Self.FK__Transacti__Custo__2E1BDC42">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="TransactionLog" EntitySet="TransactionLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserAddre__Custo__1920BF5C" Association="Self.FK__UserAddre__Custo__1920BF5C">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="UserAddress" EntitySet="UserAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FailedTra__Faile__32E0915F" Association="Self.FK__FailedTra__Faile__32E0915F">
+            <End Role="FailedTransactionErrorType" EntitySet="FailedTransactionErrorTypes" />
+            <End Role="FailedTransactionLog" EntitySet="FailedTransactionLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleID__1273C1CD" Association="Self.FK__Users__RoleID__1273C1CD">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__Trans__2C3393D0" Association="Self.FK__Transacti__Trans__2C3393D0">
+            <End Role="TransactionType" EntitySet="TransactionTypes" />
+            <End Role="TransactionLog" EntitySet="TransactionLogs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProjectPayV7ModelStoreContainer" CdmEntityContainer="ProjectPayV7Entities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="ProjectPayV7Model.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="Accountno" ColumnName="Accountno" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CurrentBalance" ColumnName="CurrentBalance" />
+                <ScalarProperty Name="AccountTypeID" ColumnName="AccountTypeID" />
+                <ScalarProperty Name="AccountStatusTypeID" ColumnName="AccountStatusTypeID" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountStatusTypes">
+            <EntityTypeMapping TypeName="ProjectPayV7Model.AccountStatusType">
+              <MappingFragment StoreEntitySet="AccountStatusType">
+                <ScalarProperty Name="AccountStatusTypeID" ColumnName="AccountStatusTypeID" />
+                <ScalarProperty Name="AccountStatusDescription" ColumnName="AccountStatusDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountTypes">
+            <EntityTypeMapping TypeName="ProjectPayV7Model.AccountType">
+              <MappingFragment StoreEntitySet="AccountType">
+                <ScalarProperty Name="AccountTypeID" ColumnName="AccountTypeID" />
+                <ScalarProperty Name="AccountTypeDescription" ColumnName="AccountTypeDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Beneficiaries">
+            <EntityTypeMapping TypeName="ProjectPayV7Model.Beneficiary">
+              <MappingFragment StoreEntitySet="Beneficiary">
+                <ScalarProperty Name="BeneficiaryID" ColumnName="BeneficiaryID" />
+                <ScalarProperty Name="BeneficiaryName" ColumnName="BeneficiaryName" />
+                <ScalarProperty Name="BeneficiaryAccountNumber" ColumnName="BeneficiaryAccountNumber" />
+                <ScalarProperty Name="BeneficiaryBankName" ColumnName="BeneficiaryBankName" />
+                <ScalarProperty Name="BeneficiaryBankIFSC" ColumnName="BeneficiaryBankIFSC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Branches">
+            <EntityTypeMapping TypeName="ProjectPayV7Model.Branch">
+              <MappingFragment StoreEntitySet="Branch">
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="BranchAddress" ColumnName="BranchAddress" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="IFSC" ColumnName="IFSC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="ProjectPayV7Model.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CustomerFirstName" ColumnName="CustomerFirstName" />
+                <ScalarProperty Name="CustomerLastName" ColumnName="CustomerLastName" />
+                <ScalarProperty Name="CustomerDateOfBirth" ColumnName="CustomerDateOfBirth" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="AadhaarNumber" ColumnName="AadhaarNumber" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="OccupationType" ColumnName="OccupationType" />
+                <ScalarProperty Name="OccupationSource" ColumnName="OccupationSource" />
+                <ScalarProperty Name="OccupationIncome" ColumnName="OccupationIncome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FailedTransactionErrorTypes">
+            <EntityTypeMapping TypeName="ProjectPayV7Model.FailedTransactionErrorType">
+              <MappingFragment StoreEntitySet="FailedTransactionErrorType">
+                <ScalarProperty Name="FailedTransactionErrorTypeID" ColumnName="FailedTransactionErrorTypeID" />
+                <ScalarProperty Name="FailedTransactionDescription" ColumnName="FailedTransactionDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FailedTransactionLogs">
+            <EntityTypeMapping TypeName="ProjectPayV7Model.FailedTransactionLog">
+              <MappingFragment StoreEntitySet="FailedTransactionLog">
+                <ScalarProperty Name="FailedTransactionID" ColumnName="FailedTransactionID" />
+                <ScalarProperty Name="FailedTransactionErrorTypeID" ColumnName="FailedTransactionErrorTypeID" />
+                <ScalarProperty Name="FailedTransactionErrorTime" ColumnName="FailedTransactionErrorTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginErrorLogs">
+            <EntityTypeMapping TypeName="ProjectPayV7Model.LoginErrorLog">
+              <MappingFragment StoreEntitySet="LoginErrorLog">
+                <ScalarProperty Name="LoginErrorID" ColumnName="LoginErrorID" />
+                <ScalarProperty Name="LoginErrorTime" ColumnName="LoginErrorTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="ProjectPayV7Model.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ProjectPayV7Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionLogs">
+            <EntityTypeMapping TypeName="ProjectPayV7Model.TransactionLog">
+              <MappingFragment StoreEntitySet="TransactionLog">
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+                <ScalarProperty Name="TransactionAmount" ColumnName="TransactionAmount" />
+                <ScalarProperty Name="PreviousBalance" ColumnName="PreviousBalance" />
+                <ScalarProperty Name="Accountno" ColumnName="Accountno" />
+                <ScalarProperty Name="BeneficiaryID" ColumnName="BeneficiaryID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionTypes">
+            <EntityTypeMapping TypeName="ProjectPayV7Model.TransactionType">
+              <MappingFragment StoreEntitySet="TransactionType">
+                <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+                <ScalarProperty Name="TransactionTypeName" ColumnName="TransactionTypeName" />
+                <ScalarProperty Name="TransactionTypeDescription" ColumnName="TransactionTypeDescription" />
+                <ScalarProperty Name="TransactionFeeAmount" ColumnName="TransactionFeeAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ProjectPayV7Model.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserTransactionPassword" ColumnName="UserTransactionPassword" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="UserPictureURL" ColumnName="UserPictureURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAddresses">
+            <EntityTypeMapping TypeName="ProjectPayV7Model.UserAddress">
+              <MappingFragment StoreEntitySet="UserAddress">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CustomerAddress1" ColumnName="CustomerAddress1" />
+                <ScalarProperty Name="CustomerAddress2" ColumnName="CustomerAddress2" />
+                <ScalarProperty Name="Landmark" ColumnName="Landmark" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="IsPermanent" ColumnName="IsPermanent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
